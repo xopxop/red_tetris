@@ -1,0 +1,13 @@
+{
+  "name": "red_tetris",
+  "version": "0.0.1",
+  "athor": "duthan",
+  "license": "MIT",
+  "scripts": {
+    "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080"
+  },
+  "devDependencies": {
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2"
+  }
+}
