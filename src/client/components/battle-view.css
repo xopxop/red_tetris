@@ -1,0 +1,68 @@
+.battle-view-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tetris-board-container {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.hold-box {
+  flex: 6;
+}
+
+.play-field {
+  flex: 10;
+  height: 100%;
+  display: grid;
+  aspect-ratio: 10 / 20;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  gap: 1px;
+  background-color: #111111;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  padding: 1px;
+}
+
+.cell {
+  background-color: #0f0f14; /* Empty cell background */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle inner cell border */
+  border-radius: 5px;
+}
+
+.cell-i { background-color: #00f0f0; border-color: #73ffff; }
+.cell-j { background-color: #0000f0; border-color: #7373ff; }
+.cell-l { background-color: #f0a000; border-color: #ffcf73; }
+.cell-o { background-color: #f0f000; border-color: #ffff73; }
+.cell-s { background-color: #00f000; border-color: #73ff73; }
+.cell-t { background-color: #a000f0; border-color: #d773ff; }
+.cell-z { background-color: #f00000; border-color: #ff7373; }
+
+.queue-box {
+  flex: 6;
+}
+
+.opponents-view-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+

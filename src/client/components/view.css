@@ -1,0 +1,116 @@
+.home-view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Header & Typography */
+.home-view-container header {
+  text-align: center;
+}
+
+.home-view-container .logo {
+  font-size: 3rem;
+  letter-spacing: 6px;
+  color: var(--text-bright);
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.home-view-container .logo .highlight {
+}
+
+.home-view-container .tagline {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  opacity: 0.8;
+}
+
+.lobby-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  #background-color: var(--card-bg);
+  #border: 3px solid var(--accent-red);
+  padding: 32px 28px;
+  border-radius: 8px;
+  box-shadow: 0 0 25px rgba(255, 30, 66, 0.25);
+}
+
+.lobby-card .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.lobby-card .input-group label {
+  font-size: 0.8rem;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lobby-card .input-group input {
+  padding: 12px 14px;
+  background-color: var(--grid-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--text-bright);
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.lobby-card .input-group input:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 8px rgba(255, 30, 66, 0.4);
+}
+
+/* Action Buttons Container */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.action-buttons button {
+  flex: 1;
+  padding: 12px;
+  background-color: var(--accent-red);
+  color: var(--text-bright);
+  border: none;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Secondary Button Variant (e.g. Join vs Create) */
+.action-buttons button:last-child {
+  background-color: transparent;
+  #border: 2px solid var(--panel-border);
+  color: var(--text-bright);
+}
+
+.action-buttons button:hover {
+  background-color: #e01838;
+}
+
+.action-buttons button:last-child:hover {
+  background-color: var(--panel-border);
+  color: var(--bg-color);
+}
+
+.action-buttons button:active {
+  transform: scale(0.97);
+}
