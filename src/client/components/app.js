@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import Game from './game.class';
-import BattleView from './battle-view'
+import LobbyView from './lobby-view/lobby-view';
+import BattleView from './battle-view/battle-view'
 
 const App = () => {
-  const [game] = useState(() => new Game());
   return (
     <>
       <BattleView />

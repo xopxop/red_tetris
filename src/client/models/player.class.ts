@@ -11,3 +11,12 @@ class Player {
     this.score += points[lines] || 0;
   }
 }
+
+class User {
+  constructor (name) {
+    this.name = name;
+  }
+}
+
+export { User };
+
