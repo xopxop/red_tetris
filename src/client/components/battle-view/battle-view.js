@@ -54,6 +54,8 @@ function PlayField({board, activePiece}) {
     })
   }
 
+  console.log(displayedBoard);
+
   return (
     <div className={style['play-field']}>
       {displayedBoard.map((row, y) => 

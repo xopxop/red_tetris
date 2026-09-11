@@ -25,8 +25,24 @@ function pieceCollided(piece, board, { x: offsetX, y: offsetY }) {
   return (false);
 }
 
-function getLockedBoard(pieceToLock, board) {
-  const newBoard = board.map(row => [...row]);
+function getRowsToClear(board) {
+  let count = 0;
+
+  for (let y = board.length - 1; y >= 0; y--) {
+    for (let x = board[y].length; x >=0; x--) {
+      const cell = board[y][x];
+      if (cell === '') {
+        return (count);
+      }
+    }
+    count++;
+  }
+
+  return (count);
+}
+
+function getRefreshedBoard(pieceToLock, board) {
+  let newBoard = board.map(row => [...row]);
   pieceToLock.shape.forEach((row, y) => {
     row.forEach((cell, x) => {
       if (cell !== '') {
@@ -34,6 +50,14 @@ function getLockedBoard(pieceToLock, board) {
       }
     })
   });
+
+  const rowsToClear = getRowsToClear(newBoard);
+  if (rowsToClear) {
+    const emptyRows = Array.from({ length: rowsToClear }, () => Array(10).fill(''));
+    newBoard.splice(-rowsToClear);
+    newBoard.unshift(...emptyRows);
+  }
+
   return (newBoard);
 }
 
@@ -69,8 +93,7 @@ function useTetris() {
   const moveDown = () => {
     if (!activePiece) return;
     if (pieceCollided(activePiece, board, { x: 0, y: 1 })) {
-      setBoard(getLockedBoard(activePiece, board));
-      // clear board if ...
+      setBoard(getRefreshedBoard(activePiece, board));
       spawnPiece(nextQueue);
     } else {
       setActivePiece(prev => ({ ...prev, x: prev.x, y: prev.y + 1 }));
