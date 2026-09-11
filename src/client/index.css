@@ -1,6 +1,8 @@
 :root {
   --bg-gradient: radial-gradient(circle at center, #1b023a 0%, #080014 100%);
   
+  --cell-size: 2rem;
+
   /* Neon Accent Colors */
   --neon-cyan: #00f0ff;
   --neon-magenta: #ff007f;

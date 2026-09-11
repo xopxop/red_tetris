@@ -1,55 +1,47 @@
 import { useState, useEffect } from 'react';
 import * as style from './battle-view.css';
-import TETROMINOS from '../../constants/tetrominos'
+import useTetris from './useTetris.hook';
+import { TETROMINOS_NEXT_QUEUE } from '../../constants/tetrominos';
 
-const createEmptyBoard = () =>
-  Array.from({ length: 20 }, () => Array(10).fill(''));
+function QueueBox({ nextQueue }) {
+  const [pieces, setPieces] = useState([]);
 
-function PlayField() {
-  const [board, setBoard] = useState(createEmptyBoard);
-  const [activePiece, setActivePiece] = useState();
-  const [nextQueue, setNextQueue] = useState();
-
-  const generateBag = () => {
-    const keys = Object.keys(TETROMINOS);
-    return keys.sort(() => Math.random() - 0.5);
-  }
-
-  const spawnPiece = (queue) => {
-    const currentQueue = [...queue];
-    const type = currentQueue.shift();
-    const shape = TETROMINOS[type];
-    const newPiece = {
-      shape: shape,
-      x: 4,
-      y: 0
-    }
-    setActivePiece(newPiece);
+  const spawnPiece = (type) => {
+    return (TETROMINOS_NEXT_QUEUE[type]);
   }
 
   useEffect(() => {
-    const initialBag = generateBag();
-    spawnPiece(initialBag);
-  }, []);
+    if (!nextQueue) return;
 
+    const pieces = nextQueue.map((piece) => spawnPiece(piece));
+    setPieces(pieces);
+  }, [nextQueue]);
+  
+  return (
+    <div className={style['queue-box']}>
+      <span>Next</span>
+      <div className={style['queue-list']}>
+        {pieces.map((piece, pieceIndex) => (
+          <div key={pieceIndex}
+            style={{ '--columns': piece.gridColumn, '--rows': piece.gridRow }} 
+            className={style['preview-piece']}
+          >
+            {piece.shape.map((row, y) => 
+              row.map((cellValue, x) => {
+                const typeClass = cellValue !== '' ? `cell-${cellValue}` : '';
+                return (
+                  <div key={`${y}-${x}`} className={`${style['cell']} ${style[typeClass]}`}></div>
+                );
+              })
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  ); 
+}
 
-  useEffect(() => {
-    if (!activePiece) return;
-    const interval = setInterval(() => {
-      setActivePiece((prev) => {
-        console.log(prev);
-        if (!prev) return;
-        return { ...prev, y: prev.y + 1 }
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [activePiece]);
-
-  //useEffect(() => {
-    //window.addEventListener('keydown', handleKeyDown);
-    //return window.removeEventListener('keydown', handleKeyDown);
-  //});
- 
+function PlayField({board, activePiece}) {
   const displayedBoard = board.map(row => [...row]);
   if (activePiece) {
     const { shape, x, y } = activePiece;
@@ -61,7 +53,6 @@ function PlayField() {
       })
     })
   }
-
 
   return (
     <div className={style['play-field']}>
@@ -78,6 +69,8 @@ function PlayField() {
 }
 
 function BattleView() {
+  const [activePiece, nextQueue, board] = useTetris();
+
   return (
     <div className={style['battle-view-container']}>
       <div className={style['chat-container']}>
@@ -87,8 +80,8 @@ function BattleView() {
       </div>
       <div className={style['tetris-board-container']}>
         <div className={style['hold-box']}></div>
-        <PlayField />
-        <div className={style['queue-box']}></div>
+        <PlayField board={board} activePiece={activePiece} />
+        <QueueBox nextQueue={nextQueue} />
       </div>
       <div className={style['opponents-view-container']}>Opponents Container</div>
     </div>

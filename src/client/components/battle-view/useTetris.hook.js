@@ -1,0 +1,127 @@
+import { useState, useEffect } from 'react';
+import { TETROMINOS } from '../../constants/tetrominos';
+
+function createEmptyBoard() {
+  return (Array.from({ length: 20 }, () => Array(10).fill('')));
+};
+
+function generateBag() {
+  const keys = Object.keys(TETROMINOS);
+  return (keys.sort(() => Math.random() - 0.5));
+}
+
+function pieceCollided(piece, board, { x: offsetX, y: offsetY }) {
+  for (let yPiece = 0; yPiece < piece.shape.length; yPiece++) {
+    for (let xPiece = 0; xPiece < piece.shape[yPiece].length; xPiece++) {
+      if (piece.shape[yPiece][xPiece] !== '') {
+        const xBoard = piece.x + xPiece + offsetX;
+        const yBoard = piece.y + yPiece + offsetY;
+        if (xBoard < 0 || xBoard >= 10 || yBoard >= 20 || (yBoard >= 0 && board[yBoard][xBoard] !== '')) {
+          return (true);
+        }
+      }
+    }
+  }
+  return (false);
+}
+
+function getLockedBoard(pieceToLock, board) {
+  const newBoard = board.map(row => [...row]);
+  pieceToLock.shape.forEach((row, y) => {
+    row.forEach((cell, x) => {
+      if (cell !== '') {
+        newBoard[pieceToLock.y + y][pieceToLock.x + x] = cell;
+      }
+    })
+  });
+  return (newBoard);
+}
+
+function useTetris() {
+  const [board, setBoard] = useState(createEmptyBoard);
+  const [activePiece, setActivePiece] = useState();
+  const [nextQueue, setNextQueue] = useState();
+
+  const spawnPiece = (queue) => {
+    const currentQueue = [...queue];
+    const type = currentQueue.shift();
+    const shape = TETROMINOS[type];
+    const newPiece = { shape: shape, x: 4, y: 0 };
+    setActivePiece(newPiece);
+    setNextQueue(currentQueue);
+  }
+
+  const rotate = () => {
+    if (!activePiece) return;
+    const rotatedShape = activePiece.shape[0].map((_, columnIndex) =>
+      activePiece.shape.map(row => row[columnIndex]).reverse()
+    );
+    const rotatedPiece = {
+      shape: rotatedShape,
+      x: activePiece.x,
+      y: activePiece.y,
+    }
+    if (pieceCollided(rotatedPiece, board, { x: 0, y: 0})) return;
+
+    setActivePiece(rotatedPiece);
+  }
+
+  const moveDown = () => {
+    if (!activePiece) return;
+    if (pieceCollided(activePiece, board, { x: 0, y: 1 })) {
+      setBoard(getLockedBoard(activePiece, board));
+      // clear board if ...
+      spawnPiece(nextQueue);
+    } else {
+      setActivePiece(prev => ({ ...prev, x: prev.x, y: prev.y + 1 }));
+    }
+  }
+
+  const moveLeft = () => {
+    if (!activePiece) return;
+    if (pieceCollided(activePiece, board, { x: -1, y: 0 })) return;
+
+    setActivePiece(prev => ({ ...prev, x: prev.x - 1, y: prev.y }));
+  }
+
+  const moveRight = () => {
+    if (!activePiece) return;
+    if (pieceCollided(activePiece, board, { x: 1, y: 0 })) return;
+
+    setActivePiece(prev => ({ ...prev, x: prev.x + 1, y: prev.y }))
+  }
+
+  useEffect(() => {
+    const bag = generateBag();
+    setNextQueue(bag);
+    spawnPiece(bag);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      moveDown();
+    }, 500);
+    return (() => clearInterval(interval));
+  }, [activePiece]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowLeft') {
+      moveLeft();
+    } else if (e.key === 'ArrowRight') {
+      moveRight();
+    } else if (e.key === 'ArrowUp') {
+      rotate();
+    } else if (e.key === 'ArrowDown') {
+      moveDown();
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return (() => window.removeEventListener('keydown', handleKeyDown));
+  }, [activePiece])
+
+  return [activePiece, nextQueue, board];
+};
+
+export default useTetris;
