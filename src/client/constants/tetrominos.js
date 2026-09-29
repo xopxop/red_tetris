@@ -1,4 +1,4 @@
-const TETROMINOS = {
+const TETROMINO_DEFINITIONS = {
   I: [['','','',''], ['i','i','i','i'], ['','','',''], ['','','','']],
   J: [['j','',''], ['j','j','j'], ['','','']],
   L: [['','','l'], ['l','l','l'], ['','','']],
@@ -8,43 +8,43 @@ const TETROMINOS = {
   Z: [['z','z',''], ['','z','z'], ['','','']],
 }
 
-const TETROMINOS_NEXT_QUEUE = {
+const PREVIEW_TETROMINO_CONFIGS = {
   I: {
-    shape: [['i','i','i','i']],
-    gridColumn: 4,
-    gridRow: 1,
+    matrix: [['i','i','i','i']],
+    columns: 4,
+    rows: 1,
   },
   J: {
-    shape: [['j','',''], ['j','j','j']],
-    gridColumn: 3,
-    gridRow: 2
+    matrix: [['j','',''], ['j','j','j']],
+    columns: 3,
+    rows: 2
   },
   L: {
-    shape: [['','','l'], ['l','l','l']],
-    gridColumn: 3,
-    gridRow: 2,
+    matrix: [['','','l'], ['l','l','l']],
+    columns: 3,
+    rows: 2,
   },
   O: {
-    shape: [['o','o'], ['o','o']],
-    gridColumn: 2,
-    gridRow: 2,
+    matrix: [['o','o'], ['o','o']],
+    columns: 2,
+    rows: 2,
   },
   S: {
-    shape: [['','s','s'], ['s','s','']],
-    gridColumn: 3,
-    gridRow: 2,
+    matrix: [['','s','s'], ['s','s','']],
+    columns: 3,
+    rows: 2,
   },
   T: {
-    shape: [['','t',''], ['t','t','t']],
-    gridColumn: 3,
-    gridRow: 2,
+    matrix: [['','t',''], ['t','t','t']],
+    columns: 3,
+    rows: 2,
   },
   Z: {
-    shape: [['z','z',''], ['','z','z']],
-    gridColumn: 3,
-    gridRow: 2,
+    matrix: [['z','z',''], ['','z','z']],
+    columns: 3,
+    rows: 2,
   },
 }
 
-export { TETROMINOS, TETROMINOS_NEXT_QUEUE };
+export { TETROMINO_DEFINITIONS , PREVIEW_TETROMINO_CONFIGS };
 

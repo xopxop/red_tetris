@@ -1,32 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import * as style from './battle-view.css';
-import useTetris from './useTetris.hook';
-import { TETROMINOS_NEXT_QUEUE } from '../../constants/tetrominos';
+import useTetris from './hooks/useTetris.hook';
 
-function QueueBox({ nextQueue }) {
-  const [pieces, setPieces] = useState([]);
+function HoldBox({ piece }) {
+  console.log(piece);
+  return (
+    <div className={style['hold-box']}>
+      <span>Hold</span>
+      {piece && (
+        <div
+          style={{ '--columns': piece.columns, '--rows': piece.rows }} 
+          className={style['preview-piece']}
+        >
+          {piece?.matrix.map((row, y) =>
+            row.map((cellValue, x) => {
+              const typeClass = cellValue !== '' ? `cell-${cellValue}` : '';
+              return (
+                <div key={`${y}-${x}`} className={`${style['cell']} ${style[typeClass]}`}></div>
+              );
+            })
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
-  const spawnPiece = (type) => {
-    return (TETROMINOS_NEXT_QUEUE[type]);
-  }
-
-  useEffect(() => {
-    if (!nextQueue) return;
-
-    const pieces = nextQueue.map((piece) => spawnPiece(piece));
-    setPieces(pieces);
-  }, [nextQueue]);
-  
+function QueueBox({ nextPieces }) {
   return (
     <div className={style['queue-box']}>
       <span>Next</span>
       <div className={style['queue-list']}>
-        {pieces.map((piece, pieceIndex) => (
+        {nextPieces?.map((piece, pieceIndex) => (
           <div key={pieceIndex}
-            style={{ '--columns': piece.gridColumn, '--rows': piece.gridRow }} 
+            style={{ '--columns': piece.columns, '--rows': piece.rows }} 
             className={style['preview-piece']}
           >
-            {piece.shape.map((row, y) => 
+            {piece.matrix.map((row, y) => 
               row.map((cellValue, x) => {
                 const typeClass = cellValue !== '' ? `cell-${cellValue}` : '';
                 return (
@@ -41,22 +51,10 @@ function QueueBox({ nextQueue }) {
   ); 
 }
 
-function PlayField({board, activePiece}) {
-  const displayedBoard = board.map(row => [...row]);
-  if (activePiece) {
-    const { shape, x, y } = activePiece;
-    shape.forEach((row, r) => {
-      row.forEach((cell, c) => {
-        if (cell != '') {
-          displayedBoard[y + r][x + c] = cell;
-        }
-      })
-    })
-  }
-
+function PlayField({ displayBoard }) {
   return (
     <div className={style['play-field']}>
-      {displayedBoard.map((row, y) => 
+      {displayBoard?.map((row, y) => 
         row.map((cellValue, x) => {
           const typeClass = cellValue !== '' ? `cell-${cellValue}` : '';
           return (
@@ -69,8 +67,16 @@ function PlayField({board, activePiece}) {
 }
 
 function BattleView() {
-  const [activePiece, nextQueue, board] = useTetris();
+  const tetris = useTetris();
 
+  useEffect(() => {
+    tetris.startGame();
+
+    return () => {
+      tetris.stopGame();
+    }
+  }, [])
+ 
   return (
     <div className={style['battle-view-container']}>
       <div className={style['chat-container']}>
@@ -79,9 +85,9 @@ function BattleView() {
         <section>Chat message</section>
       </div>
       <div className={style['tetris-board-container']}>
-        <div className={style['hold-box']}></div>
-        <PlayField board={board} activePiece={activePiece} />
-        <QueueBox nextQueue={nextQueue} />
+        <HoldBox piece={tetris.holdPiece} />
+        <PlayField displayBoard={tetris.displayBoard} />
+        <QueueBox nextPieces={tetris.nextPieces} />
       </div>
       <div className={style['opponents-view-container']}>Opponents Container</div>
     </div>
