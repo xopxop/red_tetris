@@ -11,6 +11,10 @@ function useBoard() {
           const xBoard = piece.x + xPiece + offsetX;
           const yBoard = piece.y + yPiece + offsetY;
           if (xBoard < 0 || xBoard >= 10 || yBoard >= 20 || (yBoard >= 0 && board[yBoard][xBoard] !== '')) {
+            console.log(`piece x,y - ${piece.x}, ${piece.y}`);
+            console.log(`x,y piece - ${xPiece}, ${yPiece}`);
+            console.log(`x,y offset - ${offsetX}, ${offsetY}`);
+            console.log(`x,y board - ${xBoard}, ${yBoard}`);
             return (true);
           }
         }
@@ -69,12 +73,25 @@ function useBoard() {
           displayBoard[y + r][x + c] = cell;
         })
       });
-    }
-    
+    } 
+
     return (displayBoard);
   }
 
-  return ({ displayBoard, pieceCollided, lockBoardAndClearRows });
+  const getHardDropYPosition = (piece) => {
+    let dropY = piece.y;
+    let y = 0;
+
+    while (!pieceCollided(piece, { x: 0, y })) {
+      y++;
+      dropY++;
+    }
+
+    console.log(y);
+    return (dropY);
+  }
+
+  return ({ displayBoard, pieceCollided, lockBoardAndClearRows, getHardDropYPosition });
 }
 
 export default useBoard;

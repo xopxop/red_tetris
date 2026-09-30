@@ -23,11 +23,18 @@ function useActivePiece() {
     _setValue(prev => ({ ...prev, x: prev.x, y: prev.y + 1 }));
   }
 
+  const hardDrop = (hardDropY) => {
+    const updated = { ...value, y: hardDropY };
+
+    _setValue(updated);
+    return (updated);
+  }
+
   const rotate = (rotatedMatrix) => {
     _setValue(prev => ({ ...prev, matrix: rotatedMatrix}));
   }
 
-  return ({ value, setValue, moveLeft, moveRight, moveDown, rotate });
+  return ({ value, setValue, moveLeft, moveRight, moveDown, rotate, hardDrop });
 }
 
 export default useActivePiece;

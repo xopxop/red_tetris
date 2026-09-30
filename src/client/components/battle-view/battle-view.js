@@ -3,7 +3,6 @@ import * as style from './battle-view.css';
 import useTetris from './hooks/useTetris.hook';
 
 function HoldBox({ piece }) {
-  console.log(piece);
   return (
     <div className={style['hold-box']}>
       <span>Hold</span>

@@ -60,7 +60,15 @@ function useTetris() {
   }
 
   const onSpaceKeyPressed = () => {
-
+    const hardDropY = board.getHardDropYPosition(activePiece.value);
+    let droppedPiece = activePiece.value;
+    if (activePiece.value.y !== hardDropY) {
+      droppedPiece = activePiece.hardDrop(hardDropY);
+    }
+    console.log(droppedPiece);
+    board.lockBoardAndClearRows(droppedPiece);
+    activePiece.setValue(bag.drawNextPiece());
+    holdBag.resetCanSwapValue();
   }
 
   const onShiftKeyPressed = () => {
