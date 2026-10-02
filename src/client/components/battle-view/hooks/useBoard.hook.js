@@ -83,11 +83,12 @@ function useBoard() {
     let y = 0;
 
     while (!pieceCollided(piece, { x: 0, y })) {
+      if (y) {
+        dropY++;
+      }
       y++;
-      dropY++;
     }
 
-    console.log(y);
     return (dropY);
   }
 
