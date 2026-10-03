@@ -39,6 +39,26 @@ function useBoard() {
     return (count);
   }
 
+  const getRowIndexesToClear = (board) => {
+    const rowIndexes = [];
+
+    for (let y = board.length - 1; y >= 0; y--) {
+      let toBeCleared = true;
+      for (let x = board[y]. length - 1; x >= 0; x--) {
+        const cell = board[y][x];
+        if (cell === '') {
+          toBeCleared = false;
+          break;
+        }
+      }
+      if (toBeCleared) {
+        rowIndexes.push(y);
+      }
+    }
+
+    return (rowIndexes);
+  }
+
   const lockBoardAndClearRows = (pieceToLock) => {
     let newBoard = board.map(row => [...row]);
 
@@ -49,13 +69,12 @@ function useBoard() {
       })
     });
 
-    const rowsToClear = getRowsToClear(newBoard);
-    
-    if (rowsToClear) {
-      const emptyRows = Array.from({ length: rowsToClear }, () => Array(10).fill(''));
- 
-      newBoard.splice(-rowsToClear);
-      newBoard.unshift(...emptyRows);
+    const rowIndexesToClear = getRowIndexesToClear(newBoard);
+
+    if (rowIndexesToClear.length) {
+      const filteredBoard = newBoard.filter((_, index) => !rowIndexesToClear.includes(index));
+      const emptyRows = Array.from({ length: rowIndexesToClear.length }, () => Array(10).fill(''));
+      newBoard = [...emptyRows, ...filteredBoard];
     }
 
     setBoard(newBoard);
