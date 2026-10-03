@@ -79,17 +79,13 @@ function useBoard() {
   }
 
   const getHardDropYPosition = (piece) => {
-    let dropY = piece.y;
-    let y = 0;
+    let offsetY = 0;
 
-    while (!pieceCollided(piece, { x: 0, y })) {
-      if (y) {
-        dropY++;
-      }
-      y++;
+    while (!pieceCollided(piece, { x: 0, y: offsetY })) {
+      offsetY++;
     }
 
-    return (dropY);
+    return (offsetY ? (piece.y + offsetY - 1) : 0);
   }
 
   return ({ displayBoard, pieceCollided, lockBoardAndClearRows, getHardDropYPosition });
