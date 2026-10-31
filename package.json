@@ -4,7 +4,8 @@
   "athor": "duthan",
   "license": "MIT",
   "scripts": {
-    "client-dev": "webpack serve --mode development"
+    "client-dev": "webpack serve --mode development",
+    "srv-dev": "nodemon src/server/main.js"
   },
   "devDependencies": {
     "@babel/core": "^8.0.1",
@@ -12,6 +13,7 @@
     "@babel/preset-react": "^8.0.1",
     "babel-loader": "^10.1.1",
     "css-loader": "^7.1.4",
+    "nodemon": "^3.1.14",
     "style-loader": "^4.0.0",
     "webpack": "^5.109.2",
     "webpack-cli": "^7.2.2",
