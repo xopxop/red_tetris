@@ -22,10 +22,26 @@ server.on('request', (_request, res) => {
 });
 */
 
+const rooms = [
+  { name: "room one"},
+  { name: "room two"},
+  { name: "room three"},
+  { name: "room four"},
+  { name: "room five"},
+  { name: "room six"},
+  { name: "room seven"},
+  { name: "room eight"},
+  { name: "room nine"},
+  { name: "room ten"},
+  { name: "room eleven"},
+]
+
 socket.on('connection', (socket) => {
   console.log('a user connected');
 
-  const data = socket.handshake.query
+  socket.on('give-room-list', () => {
+    socket.emit('return-room-list', rooms)
+  })
 
   socket.on('disconnect', (reason) => {
     console.log('a user disconnect')
