@@ -48,7 +48,6 @@ socket.on('connection', (socket) => {
   })
 });
 
-
 server.listen(port, () => {
   console.log(`Tetris server is listening on port ${port}`);
 });
