@@ -1,3 +1,4 @@
+import HomeViewPage from './home-view-page/home-view-page.component.js';
 import LobbyView from './lobby-view/lobby-view';
 import BattleView from './battle-view/battle-view'
 import { useEffect, useState } from 'react'
@@ -62,7 +63,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <SocketProvider>
-        <TestComponent />
+        <HomeViewPage />
       </SocketProvider>
     </BrowserRouter>
   );

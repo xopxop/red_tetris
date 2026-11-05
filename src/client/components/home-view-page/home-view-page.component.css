@@ -1,0 +1,28 @@
+.page {
+  position: relative;
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.ambient {
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  filter: blur(130px);
+  opacity: .11;
+  border-radius: 50%;
+}
+
+.ambient-one {
+  background: var(--lime);
+  top: 13%;
+  left: 10%;
+}
+
+.ambient-two {
+  background: var(--cyan);
+  right: 8%;
+  bottom: 4%;
+}

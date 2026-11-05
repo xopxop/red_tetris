@@ -1,0 +1,100 @@
+header {
+  flex: 10;
+  position: relative;
+  padding: 0 4.5vw;
+  display: flex;
+  border-bottom: 1px solid #1f2633;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  cursor: default;
+
+  div.logo-mark {
+    display: grid;
+    grid-template-columns: repeat(3, 7px);
+    grid-template-rows: repeat(2, 7px);
+    gap: 2px;
+    transform: rotate(-6deg);
+
+    i {
+      background: var(--lime);
+      box-shadow: 0 0 9px rgba(255,51,79,.35);
+    }
+  
+    i:first-child {
+      grid-column:2;
+    } 
+  }
+
+  div.text-mark > span:nth-child(2) {
+    color: var(--lime);
+    margin-left: 3px;
+  }
+}
+
+.site-nav {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  a {
+    position: relative;
+    color: #7f899a;
+    text-decoration: none;
+    font: 500 9px 'DM Mono';
+    letter-spacing: .14em;
+    transition: .18s;
+  }
+  
+  a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -7px;
+    height: 1px;
+    background: var(--lime);
+    transition:.18s;
+  }
+
+  a:hover {
+    color:#fff;
+  }
+
+  a:hover::after {
+    right:0;
+  }
+}
+
+.status-pill {
+  border: 1px solid #2b3445;
+  border-radius: 20px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap:7px;
+  font: 500 10px 'DM Mono';
+  letter-spacing: .12em;
+  color: #98a1b2;
+  cursor: default;
+
+  i.online-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 8px var(--lime);
+  }
+}
