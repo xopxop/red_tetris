@@ -1,4 +1,4 @@
-import * as style from './lobby-view.css';
+import * as style from './lobby-view-page.component.css';
 
 const data = [
   { roomName: 'room-1', playerCount: 1 },
@@ -34,7 +34,7 @@ const data = [
   { roomName: 'room-31', playerCount: 1 },
 ]
 
-function LobbyView() {
+function LobbyViewPage() {
 
   return (
     <>
@@ -81,4 +81,4 @@ function LobbyView() {
   );
 }
 
-export default LobbyView;
+export default LobbyViewPage;

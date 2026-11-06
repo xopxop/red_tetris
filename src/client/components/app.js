@@ -1,5 +1,5 @@
 import HomeViewPage from './home-view-page/home-view-page.component.js';
-import LobbyView from './lobby-view/lobby-view';
+import LobbyViewPage from './lobby-view-page/lobby-view-page.component.js';
 import BattleView from './battle-view/battle-view'
 import { useEffect, useState } from 'react'
 import { useSocket } from './useSocket'
@@ -70,7 +70,11 @@ const App = () => {
 
   return (
     <>
-      {(!username) ? (<HomeViewPage onJoin={(name) => setUsername(name)} />) : (<div>Test</div>) }
+      {(!username) ? 
+        (<HomeViewPage onJoin={(name) => setUsername(name)} />)
+        : 
+        (<LobbyViewPage/>)
+      }
     </>
   );
 }
