@@ -2,8 +2,8 @@ import HomeViewPage from './home-view-page/home-view-page.component.js';
 import LobbyView from './lobby-view/lobby-view';
 import BattleView from './battle-view/battle-view'
 import { useEffect, useState } from 'react'
-import { SocketProvider, useSocket } from './useSocket'
-import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
+import { useSocket } from './useSocket'
+import { Link, Routes, Route } from 'react-router-dom'
 
 const Lobby = ({socket}) => {
   const [rooms, setRooms] = useState([]);
@@ -60,12 +60,18 @@ const TestComponent = () => {
 }
 
 const App = () => {
+  const { socket } = useSocket();
+  const [ username, setUsername ] = useState("");
+
+
+  useEffect(() => {
+    socket.connect();
+  }, [])
+
   return (
-    <BrowserRouter>
-      <SocketProvider>
-        <HomeViewPage />
-      </SocketProvider>
-    </BrowserRouter>
+    <>
+      {(!username) ? (<HomeViewPage onJoin={(name) => setUsername(name)} />) : (<div>Test</div>) }
+    </>
   );
 }
 

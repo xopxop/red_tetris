@@ -1,11 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { SocketProvider } from './components/useSocket'
+import { BrowserRouter } from 'react-router-dom'
 import App from './components/app';
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <SocketProvider>
+        <App />
+      </SocketProvider>
+    </BrowserRouter>
   </StrictMode>
 )
 

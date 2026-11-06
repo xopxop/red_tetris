@@ -1,4 +1,6 @@
 import * as style from './main.component.css';
+import { useState } from 'react';
+import { useSocket } from '../../useSocket';
 
 function UserSVGIcon() {
   return (
@@ -38,7 +40,16 @@ function ArrowSVGIcon() {
 }
 
 
-function Main() {
+function Main({ onJoin }) {
+  const { socket } = useSocket();
+  const [name, setName] = useState("");
+
+  const submit = (e) => {
+    e.preventDefault();
+    socket.emit('setUsername', name);
+    onJoin(name);
+  }
+
   return (
     <main>
       <div className={style["eyebrow"]}>
@@ -54,12 +65,17 @@ function Main() {
         <br />
         Clear lines, send garbage, and own the grid.
       </p>
-      <form className={style["join-card"]}>
+      <form
+        className={style["join-card"]}
+        onSubmit={(e) => submit(e)}
+      >
         <label htmlFor="username">CHOOSE YOUR CALLSIGN</label>
         <div className={style["input-shell"]}>
           <UserSVGIcon name="user" />
           <input
             id="username"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Enter username"
             maxLength={16}
             autoFocus

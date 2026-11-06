@@ -1,51 +1,30 @@
 import http from 'http'
 import { Server } from 'socket.io';
 
+const port = 3000
 // Create a local server to receive data from
 const server = http.createServer();
-const socket = new Server(server, {
+const io = new Server(server, {
   cors: {
-    origin: "http://localhost:8080"
+    origin: `http://localhost:8080`
   }
 })
 
-const port = 3000
+const user = [];
 
-
-// Listen to the request event
-/*
-server.on('request', (_request, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({
-    data: 'Hello World!',
-  }));
-});
-*/
-
-const rooms = [
-  { name: "room one"},
-  { name: "room two"},
-  { name: "room three"},
-  { name: "room four"},
-  { name: "room five"},
-  { name: "room six"},
-  { name: "room seven"},
-  { name: "room eight"},
-  { name: "room nine"},
-  { name: "room ten"},
-  { name: "room eleven"},
-]
-
-socket.on('connection', (socket) => {
+io.on('connection', (client) => {
   console.log('a user connected');
 
-  socket.on('give-room-list', () => {
-    socket.emit('return-room-list', rooms)
-  })
+  function handleSetUsername(username) {
+    user.push(username);
+  }
 
-  socket.on('disconnect', (reason) => {
+  client.on('setUsername', handleSetUsername);
+
+  client.on('disconnect', (_reason) => {
     console.log('a user disconnect')
   })
+
 });
 
 server.listen(port, () => {
