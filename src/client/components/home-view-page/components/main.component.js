@@ -1,44 +1,7 @@
 import * as style from './main.component.css';
 import { useState } from 'react';
 import { useSocket } from '../../useSocket';
-
-function UserSVGIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="8" r="3.5" />
-      <path d="M5.5 20c.5-4 2.6-6 6.5-6s6 2 6.5 6" />
-    </svg>
-  )
-}
-
-function ArrowSVGIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-
+import { UserIcon, ArrowIcon } from '../../ui/icon.component.js'
 
 function Main({ onJoin }) {
   const { socket } = useSocket();
@@ -71,7 +34,7 @@ function Main({ onJoin }) {
       >
         <label htmlFor="username">CHOOSE YOUR CALLSIGN</label>
         <div className={style["input-shell"]}>
-          <UserSVGIcon name="user" />
+          <UserIcon />
           <input
             id="username"
             value={name}
@@ -85,7 +48,7 @@ function Main({ onJoin }) {
           className={style["primary-button"]}
           type="submit"
         >
-          ENTER THE ARENA <ArrowSVGIcon />
+          ENTER THE ARENA <ArrowIcon />
         </button>
         <small>No account needed. Just blocks.</small>
       </form>

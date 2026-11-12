@@ -1,42 +1,6 @@
 import * as style from './main.component.css';
 import { useState } from 'react';
-
-function UserSVGIcon({size = 18}) {
-  return (
-   <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="8" r="3.5" />
-      <path d="M5.5 20c.5-4 2.6-6 6.5-6s6 2 6.5 6" />
-    </svg>
-  );
-}
-
-function ArrowSVGIcon({ size = 18 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  )
-}
+import { UserIcon, ArrowIcon } from '../ui/icon.component.js';
 
 function Main() {
   const [roomCode, setRoomCode] = useState("")
@@ -138,11 +102,11 @@ function Main() {
                   {room.level}
                 </span>
                 <span className={style["room-count"]}>
-                  <UserSVGIcon size={14} />
+                  <UserIcon size={14} />
                   {room.players} / 6
                 </span>
                 <span className={style["room-ping"]}>{room.ping} MS</span>
-                <ArrowSVGIcon size={16} />
+                <ArrowIcon size={16} />
               </button>
             ))}
           </div>
@@ -157,7 +121,7 @@ function Main() {
                 maxLength={16}
               />
               <button type="submit" disabled={!roomCode.trim()}>
-                JOIN ROOM <ArrowSVGIcon size={16} />
+                JOIN ROOM <ArrowIcon size={16} />
               </button>
             </div>
           </form>
@@ -218,7 +182,7 @@ function Main() {
               })
             }
           >
-            CREATE LOBBY <ArrowSVGIcon />
+            CREATE LOBBY <ArrowIcon />
           </button>
         </section>
       </div>
