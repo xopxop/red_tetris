@@ -1,0 +1,78 @@
+header {
+  flex: 10;
+  position: relative;
+  padding: 0 4.5vw;
+  display: flex;
+  border-bottom: 1px solid #1f2633;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  cursor: default;
+
+  div.logo-mark {
+    display: grid;
+    grid-template-columns: repeat(3, 7px);
+    grid-template-rows: repeat(2, 7px);
+    gap: 2px;
+    transform: rotate(-6deg);
+
+    i {
+      background: var(--lime);
+      box-shadow: 0 0 9px rgba(255,51,79,.35);
+    }
+  
+    i:first-child {
+      grid-column:2;
+    } 
+  }
+
+  div.text-mark > span:nth-child(2) {
+    color: var(--lime);
+    margin-left: 3px;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font: 10px 'DM Mono';
+
+  strong {
+    color: #ecf0f3;
+    letter-spacing: .05em;
+  }
+
+  span:nth-of-type(2) {
+    color: #626b7d;
+    border-left: 1px solid #303747;
+    padding-left: 11px;
+  }
+
+  button {
+    color: #757f91;
+    background: transparent;
+    border: 0;
+    margin-left: 7px;
+  }
+
+  button:hover {
+    color:#fff;
+  }
+}
+
+.online-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 8px var(--lime);
+}
