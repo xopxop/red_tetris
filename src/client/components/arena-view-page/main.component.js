@@ -1,34 +1,13 @@
 import * as style from './main.component.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserIcon, ArrowIcon } from '../ui/icon.component.js';
+import { useSocket } from '../useSocket.js';
 
 function Main() {
   const [roomCode, setRoomCode] = useState("")
   const [maxPlayers, setMaxPlayers] = useState(4)
   const [privateRoom, setPrivateRoom] = useState(false)
-  const publicRooms = [
-    {
-      code: "VOID-2F8A",
-      name: "Neon Dropzone",
-      players: 3,
-      level: "CASUAL",
-      ping: 24,
-    },
-    {
-      code: "BLOCK-7Q2M",
-      name: "Stack District",
-      players: 2,
-      level: "RANKED",
-      ping: 41,
-    },
-    {
-      code: "TETRA-4K9X",
-      name: "Midnight Circuit",
-      players: 5,
-      level: "CASUAL",
-      ping: 58,
-    },
-  ]
+  const [ publicRooms, setPublicRooms ] = useState([]);
 
   const onLeave = () => {
   }
@@ -45,6 +24,15 @@ function Main() {
       })
     */
   }
+
+  
+  const { socket } = useSocket();
+
+  useEffect(() => {
+    socket.emit("rooms:read", (r) => {
+      setPublicRooms(r.data);
+    })
+  }, []);
 
   return(
     <section className={style["rooms-content"]}>

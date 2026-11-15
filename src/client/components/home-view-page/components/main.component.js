@@ -5,12 +5,17 @@ import { UserIcon, ArrowIcon } from '../../ui/icon.component.js'
 
 function Main({ onJoin }) {
   const { socket } = useSocket();
-  const [name, setName] = useState("");
+  const [ username, setUsername] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
-    socket.emit('setUsername', name);
-    onJoin(name);
+    socket.emit('user:create', username, (response) => {
+      if (response.status === 'success') {
+        onJoin(username);
+      } else {
+        console.log("Failed to create user:", response.message)
+      }
+    });
   }
 
   return (
@@ -37,8 +42,8 @@ function Main({ onJoin }) {
           <UserIcon />
           <input
             id="username"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
             maxLength={16}
             autoFocus

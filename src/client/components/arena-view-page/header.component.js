@@ -2,8 +2,7 @@ import * as style from './header.component.css';
 import { LogoutIcon } from '../ui/icon.component.js'
 import Logo from '../ui/logo.component.js';
 
-function Profile() {
-  const username = "duthan";
+function Profile({ username }) {
   const onLeave = () => {
   };
 
@@ -19,11 +18,11 @@ function Profile() {
   );
 }
 
-function Header() {
+function Header({ username }) {
   return (
     <header>
       <Logo />
-      <Profile />
+      <Profile username={username} />
     </header>
   );
 }

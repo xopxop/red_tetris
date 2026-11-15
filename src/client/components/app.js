@@ -61,25 +61,27 @@ const TestComponent = () => {
 
 const App = () => {
   const { socket } = useSocket();
-  const [ username, setUsername ] = useState("");
+  const [ username, setUsername ] = useState(null);
 
 
   useEffect(() => {
     socket.connect();
   }, [])
 
+  /*
   return (
     <>
       <ArenaViewPage />
     </>
   );
+  */
 
   return (
     <>
       {(!username) ? 
         (<HomeViewPage onJoin={(name) => setUsername(name)} />)
         : 
-        (<ArenaViewPage/>)
+        (<ArenaViewPage username={username} />)
       }
     </>
   );
