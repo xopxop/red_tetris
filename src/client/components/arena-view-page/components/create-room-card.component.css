@@ -1,0 +1,154 @@
+.create-room-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid #354050;
+  background: linear-gradient(145deg, #151c28 0%, #0d121b 70%);
+  box-shadow: 0 24px 55px rgba(0,0,0,.24);
+}
+
+.create-room-card::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  right: -80px;
+  top: -100px;
+  background: var(--lime);
+  filter: blur(90px);
+  opacity: .07;
+  pointer-events: none;
+}
+
+.create-room-card h3 {
+  margin: 8px 0;
+  font-size: 27px;
+  letter-spacing: -.045em;
+}
+
+.create-room-card > p {
+  color: #7d8798;
+  margin: 0 0 24px;
+  font-size: 11px;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.create-icon {
+  width: 49px;
+  height: 49px;
+  display: grid;
+  grid-template-columns: repeat(3,10px);
+  grid-template-rows: repeat(2,10px);
+  place-content: center;
+  gap: 3px;
+  border: 1px solid #3e4859;
+  margin-bottom: 25px;
+  transform: rotate(-3deg);
+}
+
+.create-icon span {
+  background: var(--lime);
+}
+
+.create-icon span:first-child {
+  grid-column: 2;
+}
+.create-icon {
+  width: 49px;
+  height: 49px;
+  display: grid;
+  grid-template-columns: repeat(3,10px);
+  grid-template-rows: repeat(2,10px);
+  place-content: center;
+  gap: 3px;
+  border: 1px solid #3e4859;
+  margin-bottom: 25px;
+  transform: rotate(-3deg);
+}
+
+.create-icon span {
+  background: var(--lime);
+}
+
+.create-icon span:first-child {
+  grid-column: 2;
+}
+
+.create-icon {
+  width: 49px;
+  height: 49px;
+  display: grid;
+  grid-template-columns: repeat(3,10px);
+  grid-template-rows: repeat(2,10px);
+  place-content: center;
+  gap: 3px;
+  border: 1px solid #3e4859;
+  margin-bottom: 25px;
+  transform: rotate(-3deg);
+}
+
+.create-icon span {
+  background: var(--lime);
+}
+
+.create-icon span:first-child {
+  grid-column: 2;
+}
+
+.create-kicker {
+  color: var(--lime);
+  font: 8px 'DM Mono';
+  letter-spacing: .14em;
+}
+
+.create-setting {
+  border-top: 1px solid #2a3343;
+  border-bottom: 1px solid #2a3343;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-setting > span {
+  color: #768093;
+  font: 8px 'DM Mono';
+  letter-spacing: .1em;
+}
+
+.privacy-toggle {
+  width: 100%;
+  min-height: 65px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid #2a3343;
+  background: transparent;
+  color: #e9edf2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.privacy-toggle > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.privacy-toggle strong {
+  font: 500 9px 'DM Mono';
+  letter-spacing: .08em;
+}
+
+.privacy-toggle small {
+  color: #657084;
+  font-size: 9px;
+}
+
+.create-button {
+  width: 100%;
+  margin-top: 21px;
+}
