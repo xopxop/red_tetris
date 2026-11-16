@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import * as style from './slide-toggle.component.css';
 
-function SlideToggle({ checked=false, onToggledChanged }) {
+function SlideToggle({ checked=false, onToggleChanged }) {
   const [ toggled, setToggled ] = useState(checked);
   const handleOnClicked = () => {
     const nextState = !toggled;
     setToggled(!toggled);
-    onToggledChanged?.(nextState);
+    onToggleChanged?.(nextState);
   }
 
   return (

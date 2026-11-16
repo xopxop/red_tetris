@@ -334,26 +334,6 @@
   letter-spacing: .1em;
 }
 
-.create-setting > div {
-  display: flex;
-  gap: 5px;
-}
-
-.create-setting button {
-  width: 32px;
-  height: 28px;
-  border: 1px solid #3a4455;
-  background: #111721;
-  color: #727d8f;
-  font: 9px 'DM Mono';
-}
-
-.create-setting button.selected {
-  border-color: var(--lime);
-  color: #081014;
-  background: var(--lime);
-}
-
 .privacy-toggle {
   width: 100%;
   min-height: 65px;
