@@ -2,6 +2,12 @@ import * as style from './main.component.css';
 import { useState, useEffect } from 'react';
 import { UserIcon, ArrowIcon } from '../ui/icon.component.js';
 import { useSocket } from '../useSocket.js';
+import { Button } from '../ui/button.component.js';
+import { SlideToggle } from '../ui/slide-toggle.component.js';
+
+function CreateRoomCard() {
+
+}
 
 function Main() {
   const [roomCode, setRoomCode] = useState("")
@@ -142,11 +148,7 @@ function Main() {
               ))}
             </div>
           </div>
-          <button
-            className={style["privacy-toggle"]}
-            onClick={() => setPrivateRoom((value) => !value)}
-            aria-pressed={privateRoom}
-          >
+          <div className={style["privacy-toggle"]}>
             <span>
               <strong>{privateRoom ? "PRIVATE ROOM" : "PUBLIC ROOM"}</strong>
               <small>
@@ -155,12 +157,13 @@ function Main() {
                   : "Visible to all players"}
               </small>
             </span>
-            <i className={privateRoom ? style["active"] : ""}>
-              <b />
-            </i>
-          </button>
-          <button
-            className={`${style["primary-button"]} ${style["create-button"]}`}
+            <SlideToggle onToggledChanged={(value) => setPrivateRoom(value)}/>
+          </div>
+
+
+
+          <Button
+            className={style["create-button"]}
             onClick={() =>
               onChoose({
                 code: "RED-9X7K",
@@ -168,10 +171,11 @@ function Main() {
                 maxPlayers,
                 privateRoom,
               })
-            }
+            } 
           >
             CREATE LOBBY <ArrowIcon />
-          </button>
+          </Button>      
+
         </section>
       </div>
       <button className={style["back-link"]} onClick={onLeave}>

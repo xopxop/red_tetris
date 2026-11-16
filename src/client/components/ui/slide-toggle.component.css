@@ -1,0 +1,28 @@
+.toggle-btn {
+  width: 34px;
+  height: 18px;
+  padding: 2px;
+  border: 0;
+  border-radius: 20px;
+  background: #343d4d;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.toggled {
+  background: var(--lime);
+  
+  div {
+    background: #081014;
+    transform: translateX(16px);
+  }
+}
+
+.thumb {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8992a2;
+  transition: .2s;
+}

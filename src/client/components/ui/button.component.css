@@ -1,0 +1,31 @@
+.btn {
+  height: 50px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--lime);
+  color: #080b10;
+}
+
+.primary:hover:not(:disabled) {
+  background: #ff5a70;
+  box-shadow: 0 0 26px rgba(255,51,79,.22);
+  transform: translateY(-1px);
+}
+
+.primary:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+

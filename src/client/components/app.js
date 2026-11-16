@@ -61,7 +61,7 @@ const TestComponent = () => {
 
 const App = () => {
   const { socket } = useSocket();
-  const [ username, setUsername ] = useState(null);
+  const [ username, setUsername ] = useState("dthan");
 
 
   useEffect(() => {

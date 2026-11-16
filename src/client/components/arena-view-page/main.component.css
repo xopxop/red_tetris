@@ -383,33 +383,6 @@
   color: #657084;
   font-size: 9px; }
 
-.privacy-toggle > i {
-  width: 34px;
-  height: 18px;
-  padding: 2px;
-  border-radius: 20px;
-  background: #343d4d;
-  transition: .2s;
-}
-
-.privacy-toggle > i b {
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #8992a2;
-  transition: .2s;
-}
-
-.privacy-toggle > i.active {
-  background: var(--lime);
-}
-
-.privacy-toggle > i.active b {
-  background: #081014;
-  transform: translateX(16px);
-}
-
 .primary-button,.secondary-button,.launch-button {
   height: 50px;
   border: 0;
