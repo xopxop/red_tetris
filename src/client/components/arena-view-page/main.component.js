@@ -3,12 +3,9 @@ import CreateRoomCard from './components/create-room-card.component.js';
 import RoomBrowserCard from './components/room-browser-card.component.js';
 
 function Main() {
-  const onLeave = () => {
-  }
-
   return(
-    <section className={style["rooms-content"]}>
-      <div className={style["rooms-heading"]}>
+    <div className={style["container"]}>
+      <div className={style["heading"]}>
         <div className={style["eyebrow"]}>
           <span>MULTIPLAYER HUB</span>
         </div>
@@ -23,10 +20,7 @@ function Main() {
         <RoomBrowserCard />
         <CreateRoomCard />
       </div>
-      <button className={style["back-link"]} onClick={onLeave}>
-        ← CHANGE CALLSIGN
-      </button>
-    </section>
+    </div>
   );
 }
 

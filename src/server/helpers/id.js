@@ -1,0 +1,18 @@
+import crypto from 'crypto';
+
+function generateUUID() {
+  return crypto.randomUUID();
+}
+
+function generateShortId(length) {
+   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   const charactersLength = characters.length;
+   let result = '';
+
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
+export { generateUUID, generateShortId };

@@ -1,13 +1,26 @@
 import * as style from './create-room-card.component.css';
+import { useSocket } from '../../useSocket.js';
 import { useState } from 'react';
 import { Button } from '../../ui/button.component.js';
 import { SlideToggle } from '../../ui/slide-toggle.component.js';
 import { ButtonToggleGroup, ButtonToggle } from '../../ui/button-toggle.component.js';
 import { ArrowIcon } from '../../ui/icon.component.js';
 
-function CreateRoomCard() {
+function CreateRoomCard({ onCreate }) {
+  const { socket } = useSocket();
   const [maxPlayers, setMaxPlayers] = useState(4)
   const [privateRoom, setPrivateRoom] = useState(false)
+
+  const handleCreateLobby = () => {
+    socket.emit("room:create", { players: maxPlayers, privateRoom }, (res) => {
+      if (res.status === 'success') {
+        console.log(res);
+        // onCreate(res.data);
+      } else {
+        console.err("Failed to create lobby:", res.message);
+      }
+    });
+  }
 
   return (
     <section className={style["create-room-card"]}>
@@ -46,14 +59,7 @@ function CreateRoomCard() {
       </div>
       <Button
         className={style["create-button"]}
-        onClick={() =>
-          onChoose({
-            code: "RED-9X7K",
-            isHost: true,
-            maxPlayers,
-            privateRoom,
-          })
-        } 
+        onClick={() => handleCreateLobby()} 
       >
         CREATE LOBBY <ArrowIcon />
       </Button>      

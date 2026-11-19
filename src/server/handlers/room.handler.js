@@ -11,9 +11,16 @@ function roomHandler(io, client, roomService) {
     callback({ status: 'success' })
   }
 
-  const createRoom = (callback) => {
+  const createRoom = (data, callback) => {
     console.log("createRoom fnc called");
-    callback({ status: 'success' });
+    try {
+      const room = roomService.createRoom(data);
+      callback({ status: 'success', data: room });
+      client.broadcast.emit("rooms:add", room);
+    } catch (e) {
+      console.error(e);
+      callback({ status: 'error', message: e.message });
+    }
   }
 
   client.on("rooms:read", getRooms);

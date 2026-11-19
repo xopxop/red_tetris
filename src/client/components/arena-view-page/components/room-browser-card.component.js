@@ -10,9 +10,16 @@ function RoomBrowserCard() {
   const { socket } = useSocket();
 
   useEffect(() => {
+    const handleRoomAdd = (newRoom) => setPublicRooms(prev => [...prev, newRoom]);
     socket.emit("rooms:read", (r) => {
       setPublicRooms(r.data);
-    })
+    });
+
+    socket.on("rooms:add", handleRoomAdd);
+
+    return () => {
+      socket.off("rooms:add", handleRoomAdd);
+    };
   }, []);
   const joinRoom = (e) => {
     e.preventDefault()
