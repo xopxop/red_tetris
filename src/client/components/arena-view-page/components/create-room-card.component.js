@@ -14,8 +14,7 @@ function CreateRoomCard({ onCreate }) {
   const handleCreateLobby = () => {
     socket.emit("room:create", { players: maxPlayers, privateRoom }, (res) => {
       if (res.status === 'success') {
-        console.log(res);
-        // onCreate(res.data);
+        onCreate(res.data);
       } else {
         console.err("Failed to create lobby:", res.message);
       }

@@ -2,7 +2,7 @@ import * as style from './main.component.css';
 import CreateRoomCard from './components/create-room-card.component.js';
 import RoomBrowserCard from './components/room-browser-card.component.js';
 
-function Main() {
+function Main({ onJoinRoom }) {
   return(
     <div className={style["container"]}>
       <div className={style["heading"]}>
@@ -18,7 +18,9 @@ function Main() {
       </div>
       <div className={style["room-choice-grid"]}>
         <RoomBrowserCard />
-        <CreateRoomCard />
+        <CreateRoomCard
+          onCreate={onJoinRoom}
+        />
       </div>
     </div>
   );

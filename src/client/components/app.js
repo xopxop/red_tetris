@@ -59,32 +59,60 @@ const TestComponent = () => {
   );
 }
 
+
+// ViewPage: "home", "arena", "lobby", "battle"
 const App = () => {
   const { socket } = useSocket();
   const [ username, setUsername ] = useState(null);
-
+  const [ room, setRoom ] = useState(null);
+  const [ viewPage, setViewPage ] = useState("home")
 
   useEffect(() => {
     socket.connect();
   }, [])
 
-  /*
-  return (
-    <>
-      <ArenaViewPage />
-    </>
-  );
-  */
+  switch (viewPage) {
+    case "battle":
+      return (
+        <div>Battle View Page</div>
+      );
+    case "lobby":
+      return (
+        <div>Lobby View Page</div>
+      );
+    case "arena":
+      return (
+        <ArenaViewPage
+          username={username}
+          onJoinRoom={(room) => {
+            setRoom(room);
+            setViewPage("lobby");
+          }}
+        />
+      );
+    case "home":
+      return (
+        <HomeViewPage
+          onUserCreate={(name) => {
+            setUsername(name);
+            setViewPage("arena");
+          }}
+        />
+      )
+  }
 
-  return (
-    <>
-      {(!username) ? 
-        (<HomeViewPage onJoin={(name) => setUsername(name)} />)
-        : 
-        (<ArenaViewPage username={username} />)
-      }
-    </>
-  );
+
+
+  if (username && room) {
+    return (<div>Lobby view</div>)
+  }
+  if (username && !room) {
+    return (<ArenaViewPage username={username} onJoinRoom={(room) => setRoom(room)}/>)
+  } else {
+    return (
+        (<HomeViewPage onUserCreate={(name) => setUsername(name)} />)
+    )
+  }
 }
 
 export default App;
